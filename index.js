@@ -20,22 +20,6 @@ function initializeUserIfNeeded(uid) {
 }
 
 /* 
-createSeller adds a seller to our global state.
-returns: the ID of the new seller
-*/
-function createSeller() {
-
-}
-
-/* 
-createBuyer adds a buyer to our global state.
-returns: the ID of the new buyer
-*/
-function createBuyer() {
-
-}
-
-/* 
 createListing adds a new listing to our global state.
     parameters: 
       [sellerID] The ID of the seller

@@ -34,7 +34,7 @@ function createListing(sellerID, price, blurb) {
 /* 
 getItemDescription returns the description of a listing
     parameter: [listingID] The ID of the listing
-    returns: the ID of the new listing
+    returns: an object that contains the price and the blurb
 */
 function getItemDescription(listingID) {
 

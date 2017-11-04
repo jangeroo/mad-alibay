@@ -1,5 +1,5 @@
-//const assert = require('assert');
-function assert() {}
+const assert = require('assert');
+
 /* 
 createSeller adds a seller to our global state.
 returns: the ID of the new seller

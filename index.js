@@ -1,5 +1,24 @@
 const assert = require('assert');
 
+function genUID() {
+    return Math.floor(Math.random() * 100000000)
+}
+
+let itemsBought = {} // global variable that keeps track of all the items a user has bought
+// You'll need to add many more global variables
+
+
+/*
+initializeUserIfNeeded adds the UID to our global state unless it's already there
+parameter: [uid] the UID of the user.
+returns: undefined
+*/
+function initializeUserIfNeeded(uid) {
+    // If the user is not in our global state, add him
+    if(!(uid in itemsBought)) itemsSold[uid] = [];
+    // There are many more things to do
+}
+
 /* 
 createSeller adds a seller to our global state.
 returns: the ID of the new seller
@@ -93,9 +112,10 @@ function searchForListings(searchTerm) {
 
 
 // The tests
-
-let sellerID = createSeller();
-let buyerID = createBuyer();
+let sellerID = genUID();
+let buyerID = genUID();
+initializeUserIfNeeded(sellerID);
+initializeUserIfNeeded(buyerID);
 let listing1ID = createListing(sellerID, 500000, "A very nice boat");
 let listing2ID = createListing(sellerID, 1000, "Faux fur gloves");
 let listing3ID = createListing(sellerID, 100, "Running shoes");

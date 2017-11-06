@@ -5,7 +5,8 @@ function genUID() {
 }
 
 let itemsBought = {} // global variable that keeps track of all the items a user has bought
-// You'll need to add many more global variables
+let itemsSold = {}
+let itemListings = {}
 
 
 /*
@@ -17,7 +18,7 @@ function initializeUserIfNeeded(uid) {
     // If the user is not in our global itemsBought variable, add him
     if(!(uid in itemsBought)) itemsBought[uid] = [];
     // If the user is not in our global itemsSold variable, add him
-    // ...
+    if (!(uid in itemsSold)) itemsSold[uid] = [];
 }
 
 /* 
@@ -29,7 +30,14 @@ createListing adds a new listing to our global state.
     returns: the ID of the new listing
 */
 function createListing(sellerID, price, blurb) {
-
+    let listingID = genUID()
+    itemListings[listingID] = {
+        sellerID,
+        price,
+        blurb,
+        forSale: true,
+    }
+    return listingID
 }
 
 /* 
@@ -38,7 +46,11 @@ getItemDescription returns the description of a listing
     returns: an object that contains the price and the blurb
 */
 function getItemDescription(listingID) {
-
+    // console.log('getItemDescription for item', listingID + ':', itemListings[listingID], '\n')
+    return {
+        price: itemListings[listingID].price,
+        blurb: itemListings[listingID].blurb,
+    }
 }
 
 /* 
@@ -54,7 +66,13 @@ The seller will see the listing in his history of items sold
     returns: undefined
 */
 function buy(buyerID, sellerID, listingID) {
-
+    // console.log('seller', sellerID, 'is selling', listingID);
+    // console.log('buyer', buyerID, 'is selling', listingID);
+    itemsBought[buyerID].push(listingID)
+    itemsSold[sellerID].push(listingID)
+    itemListings[listingID].forSale = false
+    // console.log('ITEM JUST SOLD:', itemListings[listingID]);
+    
 }
 
 
@@ -64,7 +82,7 @@ allItemsSold returns the IDs of all the items sold by a seller
     returns: an array of listing IDs
 */
 function allItemsSold(sellerID) {
-
+    return itemsSold[sellerID]
 }
 
 /*
@@ -73,7 +91,7 @@ allItemsBought returns the IDs of all the items bought by a buyer
     returns: an array of listing IDs
 */
 function allItemsBought(buyerID) {
-
+    return itemsBought[buyerID]
 }
 
 /*
@@ -82,7 +100,10 @@ Once an item is sold, it will not be returned by allListings
     returns: an array of listing IDs
 */
 function allListings() {
-
+    let items = Object.keys(itemListings)
+    return items.filter(
+        listingID => itemListings[listingID].forSale == true
+    )
 }
 
 /*
@@ -92,7 +113,9 @@ Once an item is sold, it will not be returned by searchForListings
     returns: an array of listing IDs
 */
 function searchForListings(searchTerm) {
-
+    return allListings().filter(
+        listingID => itemListings[listingID].blurb.includes(searchTerm)
+    )
 }
 
 
@@ -101,21 +124,31 @@ let sellerID = genUID();
 let buyerID = genUID();
 initializeUserIfNeeded(sellerID);
 initializeUserIfNeeded(buyerID);
+// console.log('BOUGHT:', itemsBought)
+// console.log('SOLD:', itemsSold)
+
 let listing1ID = createListing(sellerID, 500000, "A very nice boat");
 let listing2ID = createListing(sellerID, 1000, "Faux fur gloves");
 let listing3ID = createListing(sellerID, 100, "Running shoes");
+// console.log('itemListings:', itemListings,'\n');
 let product2Description = getItemDescription(listing2ID);
+// console.log("product2Description ", product2Description);
 
 buy(buyerID, sellerID, listing2ID);
 buy(buyerID, sellerID, listing3ID);
 
 let allSold = allItemsSold(sellerID);
+//  console.log("allSold ", allSold);
 let soldDescriptions = allSold.map(getItemDescription);
+//  console.log("soldDescriptions ", soldDescriptions);
 
 let allBought = allItemsBought(buyerID);
+//  console.log("allBought ", allBought);
 let allBoughtDescriptions = allBought.map(getItemDescription)
+//  console.log("allBoughtDescriptions ", allBoughtDescriptions);
 
 let listings = allListings();
+//  console.log("listings ", listings);
 let boatListings = searchForListings("boat");
 let shoeListings = searchForListings("shoes");
 
@@ -130,3 +163,5 @@ assert(boatListings.length == 1); // The boat hasn't been sold yet
 assert(shoeListings.length == 0); // The shoes have been sold
 assert(boatBlurb == "A very nice boat");
 assert(boatPrice == 500000);
+
+console.log('ALL TESTS PASSED');

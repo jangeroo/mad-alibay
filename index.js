@@ -14,9 +14,10 @@ parameter: [uid] the UID of the user.
 returns: undefined
 */
 function initializeUserIfNeeded(uid) {
-    // If the user is not in our global state, add him
-    if(!(uid in itemsBought)) itemsSold[uid] = [];
-    // There are many more things to do
+    // If the user is not in our global itemsBought variable, add him
+    if(!(uid in itemsBought)) itemsBought[uid] = [];
+    // If the user is not in our global itemsSold variable, add him
+    // ...
 }
 
 /* 

@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.btn {
+  background: #EEA16E;
+  background-image: -webkit-linear-gradient(top, #EEA16E, #ff6a00);
+  background-image: -moz-linear-gradient(top, #EEA16E, #ff6a00);
+  background-image: -ms-linear-gradient(top, #EEA16E, #ff6a00);
+  background-image: -o-linear-gradient(top, #EEA16E, #ff6a00);
+  background-image: linear-gradient(to bottom, #EEA16E, #ff6a00);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  margin: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border-style: none;
+}
+
+.btn:hover {
+  background: #b8b8b8;
+  text-decoration: none;
+}
+
+
+.mid-content{
+  font-weight:bold;
+  color:#7B7B7B;
+  font-size:1.2em;
+  text-align:center;
+  font-family:arial, helvetica, sans-serif;
+  line-height:1;
+  padding:0px;
+  margin: 20px auto;
+  width: 100%;
+  flex:1;
+
+}
+
+.home-content{
+  font-weight:bold;
+  color:#7B7B7B;
+  font-size:1.2em;
+  text-align:center;
+  font-family:arial, helvetica, sans-serif;
+  line-height:1;
+  padding:0px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.login{
+  text-align:center;
+  margin:0px;
+  padding:0px;
+  font-weight:bold;
+  color:white;
+  letter-spacing:0pt;
+  word-spacing:7pt;
+  font-size:1em;
+  font-family:arial, helvetica, sans-serif;
+  line-height:1;
+  margin:20px;
+  padding:0px;
+}
+
+.footer{
+  background-color:#EEA16E;
+  min-height:100px;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-bottom{
+  font-size: 0.7em;
+  color: white;
+  bottom: 0;
+  margin: 10px;
+}
+
+.searchBar{
+  width:90%;
+  height: 50px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.searchBar > input {
+  border-radius: 28px;
+  font-family: Arial;
+  background-color:#FFF4E9;
+  color: black;
+  font-size: 20px;
+  border: 1px solid grey;
+  text-align: center;
+  width: calc(100% - 60px);
+  height: calc(100% - 2px);
+  padding: 0;
+  padding-left: 10px;
+  padding-right: 50px;
+  overflow: auto;
+  outline: none;
+}
+
+.searchBar > input:focus {
+  box-shadow: 0px 0px 10px 0px orange;
+}
+
+.searchBar > button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  background: url(https://image.flaticon.com/icons/svg/149/149309.svg);
+  background-repeat: no-repeat;
+  border: none;
+  width: 20px;
+  height: 20px;
+}

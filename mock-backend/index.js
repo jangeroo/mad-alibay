@@ -53,6 +53,7 @@ function getItemDescription(listingID) {
     }
 }
 
+export *
 /* 
 buy changes the global state.
 Another buyer will not be able to purchase that listing
@@ -118,50 +119,60 @@ function searchForListings(searchTerm) {
     )
 }
 
+module.exports={
+    genUID,
+    initializeUserIfNeeded,
+    createListing,
+    getItemDescription,
+    buy,
+    allItemsSold
+    allItemsBought,
+    allListings,
+    searchForListings
+}
+// // The tests
+// let sellerID = genUID();
+// let buyerID = genUID();
+// initializeUserIfNeeded(sellerID);
+// initializeUserIfNeeded(buyerID);
+// // console.log('BOUGHT:', itemsBought)
+// // console.log('SOLD:', itemsSold)
 
-// The tests
-let sellerID = genUID();
-let buyerID = genUID();
-initializeUserIfNeeded(sellerID);
-initializeUserIfNeeded(buyerID);
-// console.log('BOUGHT:', itemsBought)
-// console.log('SOLD:', itemsSold)
+// let listing1ID = createListing(sellerID, 500000, "A very nice boat");
+// let listing2ID = createListing(sellerID, 1000, "Faux fur gloves");
+// let listing3ID = createListing(sellerID, 100, "Running shoes");
+// // console.log('itemListings:', itemListings,'\n');
+// let product2Description = getItemDescription(listing2ID);
+// // console.log("product2Description ", product2Description);
 
-let listing1ID = createListing(sellerID, 500000, "A very nice boat");
-let listing2ID = createListing(sellerID, 1000, "Faux fur gloves");
-let listing3ID = createListing(sellerID, 100, "Running shoes");
-// console.log('itemListings:', itemListings,'\n');
-let product2Description = getItemDescription(listing2ID);
-// console.log("product2Description ", product2Description);
+// buy(buyerID, sellerID, listing2ID);
+// buy(buyerID, sellerID, listing3ID);
 
-buy(buyerID, sellerID, listing2ID);
-buy(buyerID, sellerID, listing3ID);
+// let allSold = allItemsSold(sellerID);
+// //  console.log("allSold ", allSold);
+// let soldDescriptions = allSold.map(getItemDescription);
+// //  console.log("soldDescriptions ", soldDescriptions);
 
-let allSold = allItemsSold(sellerID);
-//  console.log("allSold ", allSold);
-let soldDescriptions = allSold.map(getItemDescription);
-//  console.log("soldDescriptions ", soldDescriptions);
+// let allBought = allItemsBought(buyerID);
+// //  console.log("allBought ", allBought);
+// let allBoughtDescriptions = allBought.map(getItemDescription)
+// //  console.log("allBoughtDescriptions ", allBoughtDescriptions);
 
-let allBought = allItemsBought(buyerID);
-//  console.log("allBought ", allBought);
-let allBoughtDescriptions = allBought.map(getItemDescription)
-//  console.log("allBoughtDescriptions ", allBoughtDescriptions);
+// let listings = allListings();
+// //  console.log("listings ", listings);
+// let boatListings = searchForListings("boat");
+// let shoeListings = searchForListings("shoes");
 
-let listings = allListings();
-//  console.log("listings ", listings);
-let boatListings = searchForListings("boat");
-let shoeListings = searchForListings("shoes");
+// let boatDescription = getItemDescription(listings[0])
+// let boatBlurb = boatDescription.blurb;
+// let boatPrice = boatDescription.price;
 
-let boatDescription = getItemDescription(listings[0])
-let boatBlurb = boatDescription.blurb;
-let boatPrice = boatDescription.price;
+// assert(allSold.length == 2); // The seller has sold 2 items
+// assert(allBought.length == 2); // The buyer has bought 2 items
+// assert(listings.length == 1); // Only the boat is still on sale
+// assert(boatListings.length == 1); // The boat hasn't been sold yet
+// assert(shoeListings.length == 0); // The shoes have been sold
+// assert(boatBlurb == "A very nice boat");
+// assert(boatPrice == 500000);
 
-assert(allSold.length == 2); // The seller has sold 2 items
-assert(allBought.length == 2); // The buyer has bought 2 items
-assert(listings.length == 1); // Only the boat is still on sale
-assert(boatListings.length == 1); // The boat hasn't been sold yet
-assert(shoeListings.length == 0); // The shoes have been sold
-assert(boatBlurb == "A very nice boat");
-assert(boatPrice == 500000);
-
-console.log('ALL TESTS PASSED');
+// console.log('ALL TESTS PASSED');

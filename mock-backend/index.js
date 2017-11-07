@@ -53,7 +53,6 @@ function getItemDescription(listingID) {
     }
 }
 
-export *
 /* 
 buy changes the global state.
 Another buyer will not be able to purchase that listing
@@ -125,11 +124,12 @@ module.exports={
     createListing,
     getItemDescription,
     buy,
-    allItemsSold
+    allItemsSold,
     allItemsBought,
     allListings,
     searchForListings
 }
+
 // // The tests
 // let sellerID = genUID();
 // let buyerID = genUID();

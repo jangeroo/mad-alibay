@@ -82,8 +82,8 @@ The seller will see the listing in his history of items sold
 */
 function buy(buyerID, sellerID, listingID) {
   return Promise.all([
-    itemsBought.child(buyerID).push().set(listingID),
-    itemsSold.child(sellerID).push().set(listingID),
+    itemsBought.child(buyerID).child(listingID).set(true),
+    itemsSold.child(sellerID).child(listingID).set(true),
     itemListings.child(listingID).child('forSale').set(false)
   ])
 }
@@ -95,7 +95,10 @@ allItemsSold returns the IDs of all the items sold by a seller
     returns: a promise containing an array of listing IDs
 */
 function allItemsSold(sellerID) {
-
+  // return itemsSold[sellerID]
+  return itemsSold.child(sellerID).once('value')
+    .then(data => data.val())
+    .then(items => Object.keys(items))
 }
 
 /*
@@ -104,7 +107,10 @@ allItemsBought returns the IDs of all the items bought by a buyer
     returns: a promise containing an array of listing IDs
 */
 function allItemsBought(buyerID) {
-
+  // return itemsBought[buyerID]
+  return itemsBought.child(buyerID).once('value')
+    .then(data => data.val())
+    .then(items => Object.keys(items))
 }
 
 /*
@@ -146,19 +152,23 @@ async function test() {
   let listing2ID = await createListing(sellerID, 1000, "Faux fur gloves")
   let listing3ID = await createListing(sellerID, 100, "Running shoes")
   let product2Description = await getItemDescription(listing2ID)
-  //  console.log("product2Description: ", product2Description);
+ console.log("product2Description: ", product2Description);
   assert(product2Description.price == 1000)
   assert(product2Description.blurb == "Faux fur gloves")
 
   await buy(buyerID, sellerID, listing2ID)
-  await buy(buyerID, sellerID, listing3ID)
+  await buy(123, 234, listing3ID)
 
-  // let allSold = await allItemsSold(sellerID)
-  // let soldDescriptions = await Promise.all(allSold.map(getItemDescription))
-  // let allBought = await allItemsBought(buyerID)
-  // let allBoughtDescriptions = await Promise.all(allBought.map(getItemDescription))
+  let allSold = await allItemsSold(sellerID)
+ console.log(`allSold from ${sellerID}`, allSold);
+  let soldDescriptions = await Promise.all(allSold.map(getItemDescription))
+ console.log("soldDescriptions ", soldDescriptions);
+  let allBought = await allItemsBought(buyerID)
+ console.log(`allBought by ${buyerID}`, allBought);
+  let allBoughtDescriptions = await Promise.all(allBought.map(getItemDescription))
+ console.log("allBoughtDescriptions ", allBoughtDescriptions);
   let listings = await allListings()
-  console.log(listings);
+ console.log(listings);
 
   // let boatListings = await searchForListings("boat")
   // let shoeListings = await searchForListings("shoes")

@@ -27,17 +27,21 @@ class Authenticate extends Component {
 
         switch(this.props.display){
             case 'login':
-            return(<div>
-                <form onSubmit={this._handleLogin}>
-                Username:
+            return(<div className="authenticationContainer">
+                <form onSubmit={this._handleLogin} className="authenticationForm">
                 <input onChange={this._handleOnChangeUsername} placeholder="Username"/>
-                Password:
-                <input onChange={this._handleOnChangePassword} placeholder="Password"/>
-                <button>Go!</button>
+                <input onChange={this._handleOnChangePassword} type="password" placeholder="Password"/>
+                <button className="btn">SIGN IN</button>
                 </form>
             </div>);
             case 'register':
-            return(<div>register</div>);
+            return(<div className="authenticationContainer">
+                <form onSubmit={this._handleLogin} className="authenticationForm">
+                <input onChange={this._handleOnChangeUsername} placeholder="Create Username"/>
+                <input onChange={this._handleOnChangePassword} type="password" placeholder="Create Password"/>
+                <input onChange={this._handleOnChangePassword} type="password" placeholder="Re-Enter Password"/>
+                <button className="btn">SIGN UP</button>
+                </form></div>);
         }
 
     }

@@ -126,3 +126,29 @@ body {
   width: 20px;
   height: 20px;
 }
+
+.authenticationContainer{
+  margin: 0px auto;
+  min-width:70%;
+  max-width:290px;
+  display:flex;
+}
+
+.authenticationForm{
+  width:100%;
+  margin: 0px auto;
+  flex-direction:column;
+}
+
+.authenticationForm > input{
+  width:100%;
+  height:30px;
+  margin: 10px auto;
+  border-radius: 28px;
+  font-family: Arial;
+  background-color:#FFF4E9;
+  color: black;
+  font-size: 20px;
+  border: 1px solid grey;
+  text-align: center;
+}

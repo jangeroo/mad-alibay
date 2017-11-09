@@ -40,6 +40,7 @@ body {
   margin: 20px auto;
   width: 100%;
   flex:1;
+  position:relative;
 
 }
 
@@ -51,7 +52,7 @@ body {
   font-family:arial, helvetica, sans-serif;
   line-height:1;
   padding:0px;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   /* bring your own prefixes */
@@ -102,13 +103,14 @@ body {
   font-size: 20px;
   border: 1px solid grey;
   text-align: center;
-  width: calc(100% - 60px);
-  height: calc(100% - 2px);
+  width: 100%;
+  height: 100%;
   padding: 0;
   padding-left: 10px;
   padding-right: 50px;
   overflow: auto;
   outline: none;
+  box-sizing: border-box;
 }
 
 .searchBar > input:focus {
@@ -151,4 +153,38 @@ body {
   font-size: 20px;
   border: 1px solid grey;
   text-align: center;
+  box-sizing: border-box;
+}
+
+.navBar{
+background-color: #7B7B7B;
+text-align: right;
+}
+
+.navBarLinks{
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 0 5px;
+  text-decoration: none;
+  border-style: none;
+  border-width:0px;
+  box-sizing: border-box;
+
+  }
+
+.linkStyle{
+  color: white;
+  text-decoration: none;
+}
+
+.matchedItem{
+  padding: 20px;
+  border-bottom: 1px solid grey;
+}
+.matchedItemBlurb{
+  padding: 20px;
+}
+.matchedItemPrice{
+  padding: 20px;
 }

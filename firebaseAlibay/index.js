@@ -29,10 +29,10 @@ returns: A promise
 function initializeUserIfNeeded(uid) {
 }
 
-/* 
+/*
 createListing adds a new listing to our global state.
 This function is incomplete. You need to complete it.
-    parameters: 
+    parameters:
       [sellerID] The ID of the seller
       [price] The price of the item
       [blurb] A blurb describing the item
@@ -50,7 +50,7 @@ function createListing(sellerID, price, blurb) {
     .then(() => listingID)
 }
 
-/* 
+/*
 getItemDescription returns the description of a listing
     parameter: [listingID] The ID of the listing
     returns: A promise that contains an object containing the price and blurb properties.
@@ -68,13 +68,13 @@ function getItemDescription(listingID) {
     })
 }
 
-/* 
+/*
 buy changes the global state.
 Another buyer will not be able to purchase that listing
 The listing will no longer appear in search results
 The buyer will see the listing in his history of purchases
 The seller will see the listing in his history of items sold
-    parameters: 
+    parameters:
      [buyerID] The ID of buyer
      [sellerID] The ID of seller
      [listingID] The ID of listing
@@ -89,7 +89,7 @@ function buy(buyerID, sellerID, listingID) {
 }
 
 
-/* 
+/*
 allItemsSold returns the IDs of all the items sold by a seller
     parameter: [sellerID] The ID of the seller
     returns: a promise containing an array of listing IDs
@@ -136,13 +136,25 @@ Once an item is sold, it will not be returned by searchForListings
     returns: a promise containing an array of listing IDs
 */
 async function searchForListings(searchTerm) {
-  items = await itemListings.once('value')
+  let items = await itemListings.once('value')
     .then(data => data.val())
-  
+
   return allListings()
     .then(listingIDs => listingIDs.filter(
       listingID => items[listingID].blurb.includes(searchTerm)
     ))
+}
+
+module.exports = {
+  genUID,
+  initializeUserIfNeeded,
+  createListing,
+  getItemDescription,
+  buy,
+  allItemsSold,
+  allItemsBought,
+  allListings,
+  searchForListings,
 }
 
 // The tests

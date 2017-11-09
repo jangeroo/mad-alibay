@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Authenticate extends Component {
 
@@ -10,6 +11,10 @@ class Authenticate extends Component {
     _handleLogin = (event)=>{
         event.preventDefault();
         this.props.updateIsAuthenticated(true);
+
+        if(this.props.isAuthenticated){
+            this.props.push("/");
+        }
     }
 
     _handleOnChangeUsername = (event) =>{

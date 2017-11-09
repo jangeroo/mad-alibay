@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar.js';
-import {Route} from 'react-router-dom';
+// import NavBar from './NavBar.js';
+// import {Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 

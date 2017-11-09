@@ -1,4 +1,4 @@
-const assert = require('assert');
+// const assert = require('assert');
 
 function genUID() {
     return Math.floor(Math.random() * 100000000)
@@ -102,7 +102,7 @@ Once an item is sold, it will not be returned by allListings
 function allListings() {
     let items = Object.keys(itemListings)
     return items.filter(
-        listingID => itemListings[listingID].forSale == true
+        listingID => itemListings[listingID].forSale === true
     )
 }
 

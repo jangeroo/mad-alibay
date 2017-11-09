@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 class Authenticate extends Component {
 
@@ -30,8 +30,7 @@ class Authenticate extends Component {
 
     render() {
 
-        switch(this.props.display){
-            case 'login':
+        if (this.props.display === 'login') {
             return(<div className="authenticationContainer">
                 <form onSubmit={this._handleLogin} className="authenticationForm">
                 <input onChange={this._handleOnChangeUsername} placeholder="Username"/>
@@ -39,7 +38,8 @@ class Authenticate extends Component {
                 <button className="btn">SIGN IN</button>
                 </form>
             </div>);
-            case 'register':
+        }
+        else if (this.props.display === 'register') {
             return(<div className="authenticationContainer">
                 <form onSubmit={this._handleLogin} className="authenticationForm">
                 <input onChange={this._handleOnChangeUsername} placeholder="Create Username"/>

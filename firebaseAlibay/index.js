@@ -95,10 +95,10 @@ allItemsSold returns the IDs of all the items sold by a seller
     returns: a promise containing an array of listing IDs
 */
 function allItemsSold(sellerID) {
-  // return itemsSold[sellerID]
   return itemsSold.child(sellerID).once('value')
     .then(data => data.val())
     .then(items => Object.keys(items))
+    .catch(err => [])
 }
 
 /*
@@ -107,10 +107,10 @@ allItemsBought returns the IDs of all the items bought by a buyer
     returns: a promise containing an array of listing IDs
 */
 function allItemsBought(buyerID) {
-  // return itemsBought[buyerID]
   return itemsBought.child(buyerID).once('value')
     .then(data => data.val())
     .then(items => Object.keys(items))
+    .catch(err => [])
 }
 
 /*
@@ -135,8 +135,14 @@ Once an item is sold, it will not be returned by searchForListings
     parameter: [searchTerm] The search string matching listing descriptions
     returns: a promise containing an array of listing IDs
 */
-function searchForListings(searchTerm) {
-
+async function searchForListings(searchTerm) {
+  items = await itemListings.once('value')
+    .then(data => data.val())
+  
+  return allListings()
+    .then(listingIDs => listingIDs.filter(
+      listingID => items[listingID].blurb.includes(searchTerm)
+    ))
 }
 
 // The tests
@@ -152,37 +158,28 @@ async function test() {
   let listing2ID = await createListing(sellerID, 1000, "Faux fur gloves")
   let listing3ID = await createListing(sellerID, 100, "Running shoes")
   let product2Description = await getItemDescription(listing2ID)
- console.log("product2Description: ", product2Description);
-  assert(product2Description.price == 1000)
-  assert(product2Description.blurb == "Faux fur gloves")
 
   await buy(buyerID, sellerID, listing2ID)
-  await buy(123, 234, listing3ID)
+  await buy(buyerID, sellerID, listing3ID)
 
   let allSold = await allItemsSold(sellerID)
- console.log(`allSold from ${sellerID}`, allSold);
   let soldDescriptions = await Promise.all(allSold.map(getItemDescription))
- console.log("soldDescriptions ", soldDescriptions);
   let allBought = await allItemsBought(buyerID)
- console.log(`allBought by ${buyerID}`, allBought);
   let allBoughtDescriptions = await Promise.all(allBought.map(getItemDescription))
- console.log("allBoughtDescriptions ", allBoughtDescriptions);
   let listings = await allListings()
- console.log(listings);
-
-  // let boatListings = await searchForListings("boat")
-  // let shoeListings = await searchForListings("shoes")
-  // let boatDescription = await getItemDescription(listings[0])
-  // let boatBlurb = boatDescription.blurb;
-  // let boatPrice = boatDescription.price;
-  // assert(allSold.length == 2); // The seller has sold 2 items
-  // assert(allBought.length == 2); // The buyer has bought 2 items
-  // assert(listings.length == 1); // Only the boat is still on sale
-  // assert(boatListings.length == 1); // The boat hasn't been sold yet
-  // assert(shoeListings.length == 0); // The shoes have been sold
-  // assert(boatBlurb == "A very nice boat");
-  // assert(boatPrice == 500000);
+  let boatListings = await searchForListings("boat")
+  let shoeListings = await searchForListings("shoes")
+  let boatDescription = await getItemDescription(listings[0])
+  let boatBlurb = boatDescription.blurb;
+  let boatPrice = boatDescription.price;
+  assert(allSold.length == 2); // The seller has sold 2 items
+  assert(allBought.length == 2); // The buyer has bought 2 items
+  assert(listings.length == 1); // Only the boat is still on sale
+  assert(boatListings.length == 1); // The boat hasn't been sold yet
+  assert(shoeListings.length == 0); // The shoes have been sold
+  assert(boatBlurb == "A very nice boat");
+  assert(boatPrice == 500000);
   console.log('ALL TESTS PASSED');
-
 }
+
 test();

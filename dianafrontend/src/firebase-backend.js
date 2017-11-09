@@ -1,14 +1,28 @@
 const assert = require('assert');
 
-var admin = require("firebase-admin");
-var serviceAccount = require("./mad-alibay-firebase-adminsdk-ji3mp-a797a61448.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://mad-alibay.firebaseio.com"
-});
-let database = admin.database();
+// var admin = require("firebase-admin");
+// var serviceAccount = require("./mad-alibay-firebase-adminsdk-ji3mp-a797a61448.json");
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://mad-alibay.firebaseio.com"
+// });
+// let database = admin.database();
+let firebase = require('firebase')
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBwfSRII50FtQIpDcvz_CFuYInA0mNqBvU",
+  authDomain: "mad-alibay.firebaseapp.com",
+  databaseURL: "https://mad-alibay.firebaseio.com",
+  projectId: "mad-alibay",
+  storageBucket: "mad-alibay.appspot.com",
+  messagingSenderId: "391243440030"
+};
+firebase.initializeApp(config);
+let database = firebase.database()
 let db = database
 
+
+// Configure global variables
 let itemsBought = db.ref('/itemsBought')
 let itemsSold = db.ref('/itemsSold')
 let itemListings = db.ref('/itemListings')
@@ -145,7 +159,7 @@ async function searchForListings(searchTerm) {
     ))
 }
 
-module.exports = {
+export default {
   genUID,
   initializeUserIfNeeded,
   createListing,
@@ -155,6 +169,7 @@ module.exports = {
   allItemsBought,
   allListings,
   searchForListings,
+  test
 }
 
 // The tests
@@ -194,4 +209,4 @@ async function test() {
   console.log('ALL TESTS PASSED');
 }
 
-test();
+// test();

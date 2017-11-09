@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import backend from './mockBackend.js';
+import backend from './mock-backend.js';
 
 
-class Buy extends Component { 
+class Buy extends Component {
 
     constructor(){
         super();
@@ -37,12 +37,12 @@ class Buy extends Component {
                 </form>
                 {this.state.queryMatchedItems.map(
                     item=>{
-                        
+
                         return (<div className='matchedItem' key={item.blurb}>
                             <div className='matchedItemBlurb'><Link to={`/product/productID=${item.productID}`}>{item.blurb}</Link></div>
                             <div className='matchedItemPrice'>{item.price}</div>
                         </div>);
-                        
+
                     }
                 )}
             </div>

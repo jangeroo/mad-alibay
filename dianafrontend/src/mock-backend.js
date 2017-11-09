@@ -21,9 +21,9 @@ function initializeUserIfNeeded(uid) {
     if (!(uid in itemsSold)) itemsSold[uid] = [];
 }
 
-/* 
+/*
 createListing adds a new listing to our global state.
-    parameters: 
+    parameters:
       [sellerID] The ID of the seller
       [price] The price of the item
       [blurb] A blurb describing the item
@@ -40,7 +40,7 @@ function createListing(sellerID, price, blurb) {
     return listingID
 }
 
-/* 
+/*
 getItemDescription returns the description of a listing
     parameter: [listingID] The ID of the listing
     returns: an object that contains the price and the blurb
@@ -53,13 +53,13 @@ function getItemDescription(listingID) {
     }
 }
 
-/* 
+/*
 buy changes the global state.
 Another buyer will not be able to purchase that listing
 The listing will no longer appear in search results
 The buyer will see the listing in his history of purchases
 The seller will see the listing in his history of items sold
-    parameters: 
+    parameters:
      [buyerID] The ID of buyer
      [sellerID] The ID of seller
      [listingID] The ID of listing
@@ -72,11 +72,11 @@ function buy(buyerID, sellerID, listingID) {
     itemsSold[sellerID].push(listingID)
     itemListings[listingID].forSale = false
     // console.log('ITEM JUST SOLD:', itemListings[listingID]);
-    
+
 }
 
 
-/* 
+/*
 allItemsSold returns the IDs of all the items sold by a seller
     parameter: [sellerID] The ID of the seller
     returns: an array of listing IDs

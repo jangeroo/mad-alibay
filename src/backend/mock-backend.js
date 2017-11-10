@@ -1,4 +1,4 @@
-const assert = require('assert');
+// const assert = require('assert');
 
 function genUID() {
     return Math.floor(Math.random() * 100000000)

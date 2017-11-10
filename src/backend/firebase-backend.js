@@ -166,6 +166,7 @@ async function searchForListings(searchTerm) {
 }
 
 export default {
+  database,
   genUID,
   initializeUserIfNeeded,
   createListing,

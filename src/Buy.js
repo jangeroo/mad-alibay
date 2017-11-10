@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import backend from './mock-backend.js';
+import backend from './backend/mock-backend.js';
 
 
 class Buy extends Component {

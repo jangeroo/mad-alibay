@@ -4,8 +4,9 @@ import Home from './Home.js';
 import NavBar from './NavBar.js';
 import Authenticate from './Authenticate.js';
 import Footer from './Footer.js';
-import Buy from './Buy.js';
+import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
+import SearchBar from './SearchBar.js';
 import './App.css';
 
 const TOKEN = "authenticationtoken";
@@ -14,8 +15,11 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = { isAuthenticated: localStorage.getItem(TOKEN) === "true" };
+    this.state = { isAuthenticated: localStorage.getItem(TOKEN) === "true", queryMatchedItems: [] }
+
   }
+
+
 
   render() {
     return (
@@ -36,6 +40,8 @@ class App extends Component {
                 localStorage.setItem(TOKEN, val);
               }
             } />
+
+          <SearchBar onResult={(result)=>this.setState({queryMatchedItems: result})}/>
 
 
 
@@ -69,7 +75,7 @@ class App extends Component {
 
 
             {/* <Buy> is the component/page in which the user can make searches for items (whether or not they are logged in) */}
-            <Route path="/buy" render={() => <Buy />} />
+            <Route path="/search" render={() => <SearchPage queryMatchedItems={this.state.queryMatchedItems}/>} />
 
 
 

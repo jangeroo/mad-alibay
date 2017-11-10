@@ -156,13 +156,25 @@ Once an item is sold, it will not be returned by searchForListings
     returns: a promise containing an array of listing IDs
 */
 async function searchForListings(searchTerm) {
-  items = await itemListings.once('value')
+  let items = await itemListings.once('value')
     .then(data => data.val())
-
+  console.log(items)
   return allListings()
     .then(listingIDs => listingIDs.filter(
       listingID => items[listingID].blurb.includes(searchTerm)
     ))
+}
+
+export default {
+  genUID,
+  initializeUserIfNeeded,
+  createListing,
+  getItemDescription,
+  buy,
+  allItemsSold,
+  allItemsBought,
+  allListings,
+  searchForListings
 }
 
 // The tests

@@ -1,14 +1,17 @@
 const assert = require('assert');
 
+// // Set up firebase for use with Node.js
 // var admin = require("firebase-admin");
 // var serviceAccount = require("./mad-alibay-firebase-adminsdk-ji3mp-a797a61448.json");
-// admin.initializeApp({
+// var config = {
 //   credential: admin.credential.cert(serviceAccount),
 //   databaseURL: "https://mad-alibay.firebaseio.com"
-// });
-// let database = admin.database();
+// }
+// admin.initializeApp(config);
+// var database = admin.database();
+
+// Set up firebase for use with browser
 let firebase = require('firebase')
-// Initialize Firebase
 var config = {
   apiKey: "AIzaSyBwfSRII50FtQIpDcvz_CFuYInA0mNqBvU",
   authDomain: "mad-alibay.firebaseapp.com",
@@ -18,11 +21,11 @@ var config = {
   messagingSenderId: "391243440030"
 };
 firebase.initializeApp(config);
-let database = firebase.database()
+var database = firebase.database()
+
 let db = database
 
 
-// Configure global variables
 let itemsBought = db.ref('/itemsBought')
 let itemsSold = db.ref('/itemsSold')
 let itemListings = db.ref('/itemListings')
@@ -94,7 +97,10 @@ The seller will see the listing in his history of items sold
      [listingID] The ID of listing
     returns: a promise
 */
-function buy(buyerID, sellerID, listingID) {
+async function buy(buyerID, listingID) {
+  let sellerID = await itemListings.once('value').then(data => data.val())
+    .then(items => items[listingID].sellerID)
+
   return Promise.all([
     itemsBought.child(buyerID).child(listingID).set(true),
     itemsSold.child(sellerID).child(listingID).set(true),
@@ -150,26 +156,13 @@ Once an item is sold, it will not be returned by searchForListings
     returns: a promise containing an array of listing IDs
 */
 async function searchForListings(searchTerm) {
-  let items = await itemListings.once('value')
+  items = await itemListings.once('value')
     .then(data => data.val())
 
   return allListings()
     .then(listingIDs => listingIDs.filter(
       listingID => items[listingID].blurb.includes(searchTerm)
     ))
-}
-
-export default {
-  genUID,
-  initializeUserIfNeeded,
-  createListing,
-  getItemDescription,
-  buy,
-  allItemsSold,
-  allItemsBought,
-  allListings,
-  searchForListings,
-  test
 }
 
 // The tests
@@ -186,8 +179,8 @@ async function test() {
   let listing3ID = await createListing(sellerID, 100, "Running shoes")
   let product2Description = await getItemDescription(listing2ID)
 
-  await buy(buyerID, sellerID, listing2ID)
-  await buy(buyerID, sellerID, listing3ID)
+  await buy(buyerID, listing2ID)
+  await buy(buyerID, listing3ID)
 
   let allSold = await allItemsSold(sellerID)
   let soldDescriptions = await Promise.all(allSold.map(getItemDescription))
@@ -209,4 +202,4 @@ async function test() {
   console.log('ALL TESTS PASSED');
 }
 
-// test();
+test();

@@ -1,4 +1,4 @@
-const assert = require('assert');
+// const assert = require('assert');
 
 // // Set up firebase for use with Node.js
 // var admin = require("firebase-admin");
@@ -158,7 +158,7 @@ Once an item is sold, it will not be returned by searchForListings
 async function searchForListings(searchTerm) {
   let items = await itemListings.once('value')
     .then(data => data.val())
-
+  console.log(items)
   return allListings()
     .then(listingIDs => listingIDs.filter(
       listingID => items[listingID].blurb.includes(searchTerm)

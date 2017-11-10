@@ -1,7 +1,7 @@
 // const assert = require('assert');
 
 // // Set up firebase for use with Node.js
-// var admin = require("firebase-admin");
+// var admin = require("firebase");
 // var serviceAccount = require("./mad-alibay-firebase-adminsdk-ji3mp-a797a61448.json");
 // var config = {
 //   credential: admin.credential.cert(serviceAccount),

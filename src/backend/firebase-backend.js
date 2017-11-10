@@ -144,7 +144,7 @@ function allListings() {
     .then(itemListings => {
       let items = Object.keys(itemListings)
       return items.filter(
-        listingID => itemListings[listingID].forSale == true
+        listingID => itemListings[listingID].forSale === true
       )
     })
 }
@@ -156,7 +156,7 @@ Once an item is sold, it will not be returned by searchForListings
     returns: a promise containing an array of listing IDs
 */
 async function searchForListings(searchTerm) {
-  items = await itemListings.once('value')
+  let items = await itemListings.once('value')
     .then(data => data.val())
 
   return allListings()
@@ -165,41 +165,57 @@ async function searchForListings(searchTerm) {
     ))
 }
 
-// The tests
-async function test() {
-  await database.ref('/').set(null);
-  let sellerID = genUID();
-  let buyerID = genUID();
-
-  await initializeUserIfNeeded(sellerID)
-  await initializeUserIfNeeded(buyerID)
-
-  let listing1ID = await createListing(sellerID, 500000, "A very nice boat")
-  let listing2ID = await createListing(sellerID, 1000, "Faux fur gloves")
-  let listing3ID = await createListing(sellerID, 100, "Running shoes")
-  let product2Description = await getItemDescription(listing2ID)
-
-  await buy(buyerID, listing2ID)
-  await buy(buyerID, listing3ID)
-
-  let allSold = await allItemsSold(sellerID)
-  let soldDescriptions = await Promise.all(allSold.map(getItemDescription))
-  let allBought = await allItemsBought(buyerID)
-  let allBoughtDescriptions = await Promise.all(allBought.map(getItemDescription))
-  let listings = await allListings()
-  let boatListings = await searchForListings("boat")
-  let shoeListings = await searchForListings("shoes")
-  let boatDescription = await getItemDescription(listings[0])
-  let boatBlurb = boatDescription.blurb;
-  let boatPrice = boatDescription.price;
-  assert(allSold.length == 2); // The seller has sold 2 items
-  assert(allBought.length == 2); // The buyer has bought 2 items
-  assert(listings.length == 1); // Only the boat is still on sale
-  assert(boatListings.length == 1); // The boat hasn't been sold yet
-  assert(shoeListings.length == 0); // The shoes have been sold
-  assert(boatBlurb == "A very nice boat");
-  assert(boatPrice == 500000);
-  console.log('ALL TESTS PASSED');
+export default {
+  genUID,
+  initializeUserIfNeeded,
+  createListing,
+  getItemDescription,
+  buy,
+  allItemsSold,
+  allItemsBought,
+  allListings,
+  searchForListings
 }
 
-test();
+// // The tests
+// async function test() {
+//   await database.ref('/').set(null);
+//   let sellerID = genUID();
+//   let buyerID = genUID();
+
+//   await initializeUserIfNeeded(sellerID)
+//   await initializeUserIfNeeded(buyerID)
+
+//   let listing1ID = await createListing(sellerID, 500000, "A very nice boat")
+//   console.log("listing1ID ", listing1ID);
+//   let listing2ID = await createListing(sellerID, 1000, "Faux fur gloves")
+//   let listing3ID = await createListing(sellerID, 100, "Running shoes")
+//   let product2Description = await getItemDescription(listing2ID)
+//   console.log("product2Description ", product2Description);
+
+//   await buy(buyerID, listing2ID)
+//   await buy(buyerID, listing3ID)
+
+//   let allSold = await allItemsSold(sellerID)
+//   let soldDescriptions = await Promise.all(allSold.map(getItemDescription))
+//   console.log("soldDescriptions ", soldDescriptions);
+//   let allBought = await allItemsBought(buyerID)
+//   let allBoughtDescriptions = await Promise.all(allBought.map(getItemDescription))
+//   console.log("allBoughtDescriptions ", allBoughtDescriptions);
+//   let listings = await allListings()
+//   let boatListings = await searchForListings("boat")
+//   let shoeListings = await searchForListings("shoes")
+//   let boatDescription = await getItemDescription(listings[0])
+//   let boatBlurb = boatDescription.blurb;
+//   let boatPrice = boatDescription.price;
+//   assert(allSold.length === 2); // The seller has sold 2 items
+//   assert(allBought.length === 2); // The buyer has bought 2 items
+//   assert(listings.length === 1); // Only the boat is still on sale
+//   assert(boatListings.length === 1); // The boat hasn't been sold yet
+//   assert(shoeListings.length === 0); // The shoes have been sold
+//   assert(boatBlurb === "A very nice boat");
+//   assert(boatPrice === 500000);
+//   console.log('ALL TESTS PASSED');
+// }
+
+// test();

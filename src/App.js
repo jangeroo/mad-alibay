@@ -8,6 +8,7 @@ import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import SearchBar from './SearchBar.js';
 import './App.css';
+import TestDataGenerator from './TestDataGenerator.js'
 
 const TOKEN = "authenticationtoken";
 
@@ -25,6 +26,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <TestDataGenerator />
 
           {/* <NavBar> is updated according to whether or not the user is authenticated.
           If the user is logged in, the NavBar will have account navigation.

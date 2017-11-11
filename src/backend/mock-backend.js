@@ -1,4 +1,4 @@
-const assert = require('assert');
+// const assert = require('assert');
 
 function genUID() {
     return Math.floor(Math.random() * 100000000)
@@ -66,7 +66,7 @@ The seller will see the listing in his history of items sold
     returns: undefined
 */
 function buy(buyerID, listingID) {
-    let sellerID = itemListings[listing1ID].sellerID
+    let sellerID = itemListings[listingID].sellerID
     itemsBought[buyerID].push(listingID)
     itemsSold[sellerID].push(listingID)
     itemListings[listingID].forSale = false
@@ -101,7 +101,7 @@ Once an item is sold, it will not be returned by allListings
 function allListings() {
     let items = Object.keys(itemListings)
     return items.filter(
-        listingID => itemListings[listingID].forSale == true
+        listingID => itemListings[listingID].forSale === true
     )
 }
 
@@ -129,49 +129,49 @@ module.exports = {
     searchForListings
 }
 
-// The tests
-let sellerID = genUID();
-let buyerID = genUID();
-initializeUserIfNeeded(sellerID);
-initializeUserIfNeeded(buyerID);
-// console.log('BOUGHT:', itemsBought)
-// console.log('SOLD:', itemsSold)
+// // The tests
+// let sellerID = genUID();
+// let buyerID = genUID();
+// initializeUserIfNeeded(sellerID);
+// initializeUserIfNeeded(buyerID);
+// // console.log('BOUGHT:', itemsBought)
+// // console.log('SOLD:', itemsSold)
 
-let listing1ID = createListing(sellerID, 500000, "A very nice boat");
-let listing2ID = createListing(sellerID, 1000, "Faux fur gloves");
-let listing3ID = createListing(sellerID, 100, "Running shoes");
-// console.log('itemListings:', itemListings,'\n');
-let product2Description = getItemDescription(listing2ID);
-// console.log("product2Description ", product2Description);
+// let listing1ID = createListing(sellerID, 500000, "A very nice boat");
+// let listing2ID = createListing(sellerID, 1000, "Faux fur gloves");
+// let listing3ID = createListing(sellerID, 100, "Running shoes");
+// // console.log('itemListings:', itemListings,'\n');
+// let product2Description = getItemDescription(listing2ID);
+// // console.log("product2Description ", product2Description);
 
-buy(buyerID, listing2ID);
-buy(buyerID, listing3ID);
+// buy(buyerID, listing2ID);
+// buy(buyerID, listing3ID);
 
-let allSold = allItemsSold(sellerID);
-//  console.log("allSold ", allSold);
-let soldDescriptions = allSold.map(getItemDescription);
-//  console.log("soldDescriptions ", soldDescriptions);
+// let allSold = allItemsSold(sellerID);
+// //  console.log("allSold ", allSold);
+// let soldDescriptions = allSold.map(getItemDescription);
+// //  console.log("soldDescriptions ", soldDescriptions);
 
-let allBought = allItemsBought(buyerID);
-//  console.log("allBought ", allBought);
-let allBoughtDescriptions = allBought.map(getItemDescription)
-//  console.log("allBoughtDescriptions ", allBoughtDescriptions);
+// let allBought = allItemsBought(buyerID);
+// //  console.log("allBought ", allBought);
+// let allBoughtDescriptions = allBought.map(getItemDescription)
+// //  console.log("allBoughtDescriptions ", allBoughtDescriptions);
 
-let listings = allListings();
-//  console.log("listings ", listings);
-let boatListings = searchForListings("boat");
-let shoeListings = searchForListings("shoes");
+// let listings = allListings();
+// //  console.log("listings ", listings);
+// let boatListings = searchForListings("boat");
+// let shoeListings = searchForListings("shoes");
 
-let boatDescription = getItemDescription(listings[0])
-let boatBlurb = boatDescription.blurb;
-let boatPrice = boatDescription.price;
+// let boatDescription = getItemDescription(listings[0])
+// let boatBlurb = boatDescription.blurb;
+// let boatPrice = boatDescription.price;
 
-assert(allSold.length == 2); // The seller has sold 2 items
-assert(allBought.length == 2); // The buyer has bought 2 items
-assert(listings.length == 1); // Only the boat is still on sale
-assert(boatListings.length == 1); // The boat hasn't been sold yet
-assert(shoeListings.length == 0); // The shoes have been sold
-assert(boatBlurb == "A very nice boat");
-assert(boatPrice == 500000);
+// assert(allSold.length === 2); // The seller has sold 2 items
+// assert(allBought.length === 2); // The buyer has bought 2 items
+// assert(listings.length === 1); // Only the boat is still on sale
+// assert(boatListings.length === 1); // The boat hasn't been sold yet
+// assert(shoeListings.length === 0); // The shoes have been sold
+// assert(boatBlurb === "A very nice boat");
+// assert(boatPrice === 500000);
 
-console.log('ALL TESTS PASSED');
+// console.log('ALL TESTS PASSED');

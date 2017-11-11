@@ -16,20 +16,28 @@ class SearchBar extends Component {
 
     _handleSearch = (event) => {
         event.preventDefault();
+        this.input.value="";
 
 
         backend.searchForListings(this.state.searchItem)        //GET Listing item IDs in an array matching search term
             .then(listings => {
+                console.log(listings,"1")
                 let arrItemObjs=[]
                 listings.forEach(ID=>{
+                    console.log(ID,"2")
                     backend.getItemDescription(ID)
                     .then(item=>{
+                        console.log(item,"3")
                         const itemObj = {productID:ID, blurb: item.blurb, price: item.price}
                         arrItemObjs=arrItemObjs.concat(itemObj);
                         this.props.onResult(arrItemObjs);
+                        
+                        
                     })
                 })
             })
+            
+            
 
     }
 
@@ -41,7 +49,7 @@ class SearchBar extends Component {
             <div className='search-content'>
                 <form onSubmit={this._handleSearch}>
                     <div className="searchBar">
-                        <input value={this.state.searchItem} onChange={this._handleSearchBarOnChange} placeholder="What are you looking for?" />
+                        <input ref={r=>this.input=r} onChange={this._handleSearchBarOnChange} placeholder="What are you looking for?"/>
                         <Link to='/search'><div/></Link>
                     </div>
                 </form>

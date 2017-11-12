@@ -16,7 +16,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      queryMatchedItems: [],
+      searchResults: [],
       userID: null,
     }
   }
@@ -42,7 +42,7 @@ class App extends Component {
             updateUser={this.updateState}
           />
 
-          <SearchBar onResult={(result) => this.setState({ queryMatchedItems: result })} />
+          <SearchBar onResult={(result) => this.setState({ searchResults: result })} />
 
 
 
@@ -66,7 +66,7 @@ class App extends Component {
 
 
             {/* <Buy> is the component/page in which the user can make searches for items (whether or not they are logged in) */}
-            <Route path="/search" render={() => <SearchPage queryMatchedItems={this.state.queryMatchedItems} />} />
+            <Route path="/search" render={() => <SearchPage searchResults={this.state.searchResults} />} />
 
 
 

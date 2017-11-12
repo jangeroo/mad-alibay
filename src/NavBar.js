@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
     _handleClick = () =>{
-        this.props.updateIsAuthenticated(false);
+        this.props.updateUser({userID: null});
     }
 
     render() {
-        if(this.props.isAuthenticated===false) {
+        if(!this.props.userID) {
             return (
                 <div className="navBar">
                     <Link className="navBarLinks" to='/login'>Login</Link>
-                    <Link className="navBarLinks" to='/register'> Register</Link>
                   </div>
             );
         }
         return(
-            <div className="navBar"><Link className="navBarLinks" to='/' onClick={this._handleClick}>Sign Out</Link>
+            <div className="navBar">
+                <Link className="navBarLinks" to='/' onClick={this._handleClick}>Sign Out</Link>
             </div>
-            
+
         )
 
     }

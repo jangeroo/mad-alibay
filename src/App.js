@@ -16,11 +16,16 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = { isAuthenticated: localStorage.getItem(TOKEN) === "true", queryMatchedItems: [] }
-
+    this.state = {
+      queryMatchedItems: [],
+      userID: null,
+    }
   }
 
-
+  updateState = update => {
+    // console.log('updating App state with', update);
+    this.setState(st => update)
+  }
 
   render() {
     return (
@@ -34,13 +39,9 @@ class App extends Component {
                   [updatedIsAuthenticated(val)] function. Updates this.state.isAuthenticated depending on user's credentials
           */}
           <NavBar
-            isAuthenticated={this.state.isAuthenticated}
-            updateIsAuthenticated={
-              (val) => {
-                this.setState({ isAuthenticated: val })
-                localStorage.setItem(TOKEN, val);
-              }
-            } />
+            userID={this.state.userID}
+            updateUser={this.updateState}
+          />
 
           <SearchBar onResult={(result) => this.setState({ queryMatchedItems: result })} />
 
@@ -89,26 +90,10 @@ class App extends Component {
             */}
             <Route path="/login" render={(routeProps) =>
               <Authenticate
-                display='login'
-                isAuthenticated={this.state.isAuthenticated}
-                push={routeProps.history.push}
-                updateIsAuthenticated={
-                  (val) => {
-                    this.setState({ isAuthenticated: val })
-                    localStorage.setItem(TOKEN, val);
-                  }
-                } />} />
-            <Route path="/register" render={(routeProps) =>
-              <Authenticate
-                display='register'
-                isAuthenticated={this.state.isAuthenticated}
-                push={routeProps.history.push}
-                updateIsAuthenticated={
-                  (val) => {
-                    this.setState({ isAuthenticated: val })
-                    localStorage.setItem(TOKEN, val);
-                  }
-                } />} />
+                setUserID={this.updateState}
+                userID={this.state.userID}
+              />
+            } />
 
             <Route exact path="/top" render={() =>
               <SiteStatistics />

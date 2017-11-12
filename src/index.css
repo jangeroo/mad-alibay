@@ -52,11 +52,7 @@ body {
   font-family:arial, helvetica, sans-serif;
   line-height:1;
   padding:0px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+
 }
 
 .login{
@@ -177,6 +173,26 @@ text-align: right;
   text-decoration: none;
 }
 
+.linkStyle:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.linkStyle:visited{
+  color: white;
+  text-decoration: none;
+}
+
+.linkStyle:active{
+  color: white;
+  text-decoration: none;
+}
+
+.linkStyle:focus{
+  color: white;
+  text-decoration: none;
+}
+
 .matchedItem{
   padding: 20px;
   border-bottom: 1px solid grey;
@@ -184,17 +200,54 @@ text-align: right;
 .matchedItemBlurb{
   padding: 20px;
 }
-.matchedItemPrice{
+.item-price{
   padding: 20px;
   color: #3DD33D;
 }
 
-.matchedItemPrice::before {
+.item-price::before {
   content:"$";
 
 }
 
-.matchedItemPrice::after {
+.item-price::after {
   content:" CAD";
 
+}
+
+.hidden{
+  display: none;
+}
+
+.item-image {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  margin: auto;
+}
+.item-image img {
+  height:100%;
+
+}
+
+.catelogue-container{
+  display:inline-flex;
+  
+}
+
+.item-container{
+  width:300px;
+  border: 1px grey solid;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: flex-start;
+
+}
+
+.item-blurb{
+height:30px;
+text-align: center;
+align-content: center;
+justify-content: center;
+vertical-align: middle;
 }

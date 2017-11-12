@@ -28,10 +28,9 @@ class SearchBar extends Component {
                     backend.getItemDescription(ID)
                     .then(item=>{
                         console.log(item,"3")
-                        const itemObj = {productID:ID, blurb: item.blurb, price: item.price}
+                        const itemObj = {productID:ID, blurb: item.blurb, image: item.image, price: item.price}
                         arrItemObjs=arrItemObjs.concat(itemObj);
-                        this.props.onResult(arrItemObjs);
-                        
+                        this.props.onResult(arrItemObjs);  
                         
                     })
                 })
@@ -49,7 +48,7 @@ class SearchBar extends Component {
             <div className='search-content'>
                 <form onSubmit={this._handleSearch}>
                     <div className="searchBar">
-                        <input ref={r=>this.input=r} onChange={this._handleSearchBarOnChange} placeholder="What are you looking for?"/>
+                        <input ref={r=>this.input=r} onChange={this._handleSearchBarOnChange} placeholder="What are you looking for?"/><button className="hidden"/>
                         <Link to='/search'><div/></Link>
                     </div>
                 </form>

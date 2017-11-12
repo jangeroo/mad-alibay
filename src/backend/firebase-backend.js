@@ -55,16 +55,26 @@ This function is incomplete. You need to complete it.
       [blurb] A blurb describing the item
     returns: A promise containing the ID of the new listing
 */
-function createListing(sellerID, price, blurb) {
+function createListing(sellerID, price, image, blurb) {
   let listingID = `item_${genUID()}`
   let item = {
     sellerID,
     price,
     blurb,
-    forSale: true,
+    image,
+    forSale: true
   }
   return itemListings.child(listingID).set(item)
     .then(() => listingID)
+}
+
+/* get itemListings Object */
+
+function getItems() {
+  return itemListings.once('value')
+  .then(item=> {
+    return item.val();
+  });
 }
 
 /*
@@ -76,6 +86,7 @@ function getItemDescription(listingID) {
   return itemListings.child(listingID).once('value')
     .then(item => {
       return {
+        image: item.val().image,
         price: item.val().price,
         blurb: item.val().blurb,
       }
@@ -175,7 +186,8 @@ export default {
   allItemsSold,
   allItemsBought,
   allListings,
-  searchForListings
+  searchForListings,
+  getItems
 }
 
 // // The tests

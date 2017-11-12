@@ -13,6 +13,8 @@ class Home extends Component {
         <div>
           <Link className="btn" onClick={this._handleBuyClick} to="/search">Buy</Link>
           <Link className="btn" onClick={this._handleSellClick} to="/sell">Sell</Link>
+          
+          <Link className="btn" onClick={this._handleSellClick} to="/top">SiteStats</Link>
         </div>
       </div>
     );

@@ -8,7 +8,8 @@ import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import SearchBar from './SearchBar.js';
 import './App.css';
-import TestDataGenerator from './TestDataGenerator.js'
+import TestDataGenerator from './TestDataGenerator.js';
+import SiteStatistics from './SiteStatistics.js'
 
 const TOKEN = "authenticationtoken";
 
@@ -43,7 +44,7 @@ class App extends Component {
               }
             } />
 
-          <SearchBar onResult={(result)=>this.setState({queryMatchedItems: result})}/>
+          <SearchBar onResult={(result) => this.setState({ queryMatchedItems: result })} />
 
 
 
@@ -77,7 +78,7 @@ class App extends Component {
 
 
             {/* <Buy> is the component/page in which the user can make searches for items (whether or not they are logged in) */}
-            <Route path="/search" render={() => <SearchPage queryMatchedItems={this.state.queryMatchedItems}/>} />
+            <Route path="/search" render={() => <SearchPage queryMatchedItems={this.state.queryMatchedItems} />} />
 
 
 
@@ -110,6 +111,10 @@ class App extends Component {
                     localStorage.setItem(TOKEN, val);
                   }
                 } />} />
+
+            <Route exact path="/top" render={() =>
+              <SiteStatistics />
+              } />
           </div>
 
 

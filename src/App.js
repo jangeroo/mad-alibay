@@ -6,7 +6,6 @@ import Authenticate from './Authenticate.js';
 import Footer from './Footer.js';
 import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
-import SearchBar from './SearchBar.js';
 import './App.css';
 import BrowseItems from './BrowseItems.js'
 
@@ -42,7 +41,6 @@ class App extends Component {
             updateUser={this.updateState}
           />
 
-          <SearchBar onResult={(result) => this.setState({ searchResults: result })} />
 
 
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Catelogue from './Catelogue.js';
+import SearchBar from './SearchBar.js';
 import backend from './backend/firebase-backend.js';
 
 class BrowseItems extends Component {
@@ -10,26 +11,23 @@ class BrowseItems extends Component {
     }
 
     componentWillMount() {
-        this._getItemsForSale();
+        this._getItemsForSale('');
     }
 
-    _getItemsForSale = () => {
-        backend.allListings().then(
-            arrItemIDs => {
-                let arrItemObjs=[];
-                arrItemIDs.forEach(
-                    itemID => {backend.getItemDescription(itemID)
-                    .then(item=>
-                        {
-                            const itemObj = {itemID:itemID, blurb: item.blurb, image: item.image, price: item.price}
-                            arrItemObjs=arrItemObjs.concat(itemObj);
+    _getItemsForSale = searchTerm => {
+        // console.log(`getting items that match: "${searchTerm}`)
+        backend.searchForListings(searchTerm)
+            .then(listings => {
+                let arrItemObjs = []
+                listings.forEach(ID => {
+                    backend.getItemDescription(ID)
+                        .then(item => {
+                            const itemObj = { productID: ID, blurb: item.blurb, image: item.image, price: item.price }
+                            arrItemObjs.push(itemObj);
                             this.setState({ itemsForSale: arrItemObjs });
-                        }
-                    )
-                }
-                )
-            }
-        )
+                        })
+                })
+            })
     }
 
 
@@ -37,8 +35,10 @@ class BrowseItems extends Component {
 
         return (
             <div className="category-container">
+                <SearchBar onResult={this._getItemsForSale} />
+
                 {this.state.itemsForSale.map(item => {
-                    return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item}/></div>)
+                    return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item} /></div>)
                 }
                 )}
             </div>

@@ -10,7 +10,6 @@ import SearchBar from './SearchBar.js';
 import './App.css';
 import BrowseItems from './BrowseItems.js'
 
-const TOKEN = "authenticationtoken";
 
 class App extends Component {
 

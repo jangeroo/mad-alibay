@@ -8,7 +8,7 @@ import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import SearchBar from './SearchBar.js';
 import './App.css';
-import SiteStatistics from './SiteStatistics.js'
+import BrowseItems from './BrowseItems.js'
 
 const TOKEN = "authenticationtoken";
 
@@ -95,9 +95,8 @@ class App extends Component {
               />
             } />
 
-            <Route exact path="/top" render={() =>
-              <SiteStatistics />
-              } />
+            <Route exact path="/browse" render={() => <BrowseItems />} />
+
           </div>
 
 

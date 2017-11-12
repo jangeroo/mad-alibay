@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Catelogue from './Catelogue.js';
 import backend from './backend/firebase-backend.js';
 
-class SiteStatistics extends Component {
+class BrowseItems extends Component {
 
     constructor() {
         super();
@@ -15,7 +15,7 @@ class SiteStatistics extends Component {
 
     _getItemsForSale = () => {
         backend.allListings().then(
-            arrItemIDs => { 
+            arrItemIDs => {
                 let arrItemObjs=[];
                 arrItemIDs.forEach(
                     itemID => {backend.getItemDescription(itemID)
@@ -47,4 +47,4 @@ class SiteStatistics extends Component {
 
 }
 
-export default SiteStatistics;
+export default BrowseItems;

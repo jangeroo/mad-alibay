@@ -11,7 +11,7 @@ class Catelogue extends Component {
                 </div>
                 <div className="item-details">
                     <div className="item-blurb">{this.props.item.blurb}</div>
-                    <div className="item-price">{this.props.item.price}</div>
+                    <div className="item-price">{Number(this.props.item.price).toLocaleString('en')}</div>
                 </div>
             </div>
         );

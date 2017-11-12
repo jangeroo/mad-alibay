@@ -63,17 +63,7 @@ class App extends Component {
             props:  [isAuthenticated] boolean. Takes value of this.state.isAuthenticated.
                     [updatedIsAuthenticated(val)] function. Updates this.state.isAuthenticated depending on user's credentials
             */}
-            <Route exact path="/" render={() =>
-              <Home
-                isAuthenticated={this.state.isAuthenticated}
-                updateIsAuthenticated={
-                  (val) => {
-                    this.setState({ isAuthenticated: val })
-                    localStorage.setItem(TOKEN, val);
-                  }
-                }
-              />} />
-
+            <Route exact path="/" render={() => <Home />} />
 
 
             {/* <Buy> is the component/page in which the user can make searches for items (whether or not they are logged in) */}

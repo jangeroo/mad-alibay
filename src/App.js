@@ -4,7 +4,6 @@ import Home from './Home.js';
 import NavBar from './NavBar.js';
 import Authenticate from './Authenticate.js';
 import Footer from './Footer.js';
-import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import BrowseItems from './BrowseItems.js'
@@ -15,7 +14,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchResults: [],
       userID: null,
     }
   }
@@ -61,11 +59,6 @@ class App extends Component {
                     [updatedIsAuthenticated(val)] function. Updates this.state.isAuthenticated depending on user's credentials
             */}
             <Route exact path="/" render={() => <Home />} />
-
-
-            {/* <Buy> is the component/page in which the user can make searches for items (whether or not they are logged in) */}
-            <Route path="/search" render={() => <SearchPage searchResults={this.state.searchResults} />} />
-
 
 
             {/* <Authenticate> is the component/page that takes care of user's credentials

@@ -6,7 +6,6 @@ import Authenticate from './Authenticate.js';
 import Footer from './Footer.js';
 import SearchPage from './SearchPage.js';
 import { BrowserRouter, Route } from 'react-router-dom';
-import SearchBar from './SearchBar.js';
 import './App.css';
 import BrowseItems from './BrowseItems.js'
 
@@ -16,7 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      queryMatchedItems: [],
+      searchResults: [],
       userID: null,
     }
   }
@@ -42,7 +41,6 @@ class App extends Component {
             updateUser={this.updateState}
           />
 
-          <SearchBar onResult={(result) => this.setState({ queryMatchedItems: result })} />
 
 
 
@@ -66,7 +64,7 @@ class App extends Component {
 
 
             {/* <Buy> is the component/page in which the user can make searches for items (whether or not they are logged in) */}
-            <Route path="/search" render={() => <SearchPage queryMatchedItems={this.state.queryMatchedItems} />} />
+            <Route path="/search" render={() => <SearchPage searchResults={this.state.searchResults} />} />
 
 
 

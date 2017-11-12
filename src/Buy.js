@@ -7,7 +7,7 @@ class Buy extends Component {
 
     constructor(){
         super();
-        this.state = {searchItem: "", queryMatchedItems: []}
+        this.state = {searchItem: "", searchResults: []}
     }
 
     componentDidMount(){
@@ -20,7 +20,7 @@ class Buy extends Component {
         const searchItemIDs = backend.searchForListings(this.state.searchItem); //search Item's ID
         const searchItems = searchItemIDs.map(ID=>({...{productID: ID},...backend.getItemDescription(ID)}));//get item's price and blurb through ID
         console.log(searchItems);
-       this.setState({queryMatchedItems: searchItems});
+       this.setState({searchResults: searchItems});
     }
 
     _handleSearchBarOnChange = (event) =>{
@@ -35,7 +35,7 @@ class Buy extends Component {
                         <button />
                     </div>
                 </form>
-                {this.state.queryMatchedItems.map(
+                {this.state.searchResults.map(
                     item=>{
 
                         return (<div className='matchedItem' key={item.blurb}>

@@ -7,7 +7,7 @@ class SearchPage extends Component {
     render() {
         return (
             <div className='search-content'>
-                {this.props.queryMatchedItems.map(
+                {this.props.searchResults.map(
                     item => {
 
                         return (

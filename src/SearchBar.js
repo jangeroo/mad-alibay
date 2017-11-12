@@ -10,10 +10,6 @@ class SearchBar extends Component {
         this.state = { searchItem: "" }
     }
 
-    componentDidMount() {
-        console.log(backend.allListings());
-    }
-
     _handleSearch = (event) => {
         event.preventDefault();
         this.input.value="";
@@ -30,13 +26,13 @@ class SearchBar extends Component {
                         console.log(item,"3")
                         const itemObj = {productID:ID, blurb: item.blurb, image: item.image, price: item.price}
                         arrItemObjs=arrItemObjs.concat(itemObj);
-                        this.props.onResult(arrItemObjs);  
-                        
+                        this.props.onResult(arrItemObjs);
+
                     })
                 })
             })
-            
-            
+
+
 
     }
 
@@ -52,7 +48,7 @@ class SearchBar extends Component {
                         <Link to='/search'><div/></Link>
                     </div>
                 </form>
-                
+
             </div>
         )
     }

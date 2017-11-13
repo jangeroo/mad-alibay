@@ -27,7 +27,7 @@ class ItemDetails extends Component {
     render() {
         return (
             <div className="catelogue-container" key={this.state.item.blurb}>
-                <Catelogue item={this.state.item} />
+                <Catelogue item={this.state.item} addToCart={true} buyerID={this.props.buyerID} />
             </div>
         );
     }

@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import backend from './backend/firebase-backend.js'
 
 class TestDataGenerator extends Component {
-    constructor() {
-        super();
-        console.log('Generating test data...');
-        this.generateData()
 
-    }
     async generateData() {
+        console.log('Generating test data...');
         backend.database.ref('/').set(null)
 
         // SET UP SOME LISTINGS FOR DIFFERENT VENDORS
@@ -39,7 +35,7 @@ class TestDataGenerator extends Component {
     }
 
     render() {
-        return (<div></div>);
+        return (<button onClick={this.generateData}>Reset Test Data</button>);
     }
 }
 

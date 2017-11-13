@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class CreateItem extends Component {
 
     constructor() {
@@ -8,11 +9,12 @@ class CreateItem extends Component {
 
     render() {
         return (
-            <div>
+            <div className="CreateList">
                 <form>
-                    <input placeholder="Blurb" />
+                    <input placeholder="Blurb" className=""/>
                     <input placeholder="Price" />
-                    <button >Create</button>
+
+                    <button className="btn">Create</button>
                 </form>
             </div>
         )

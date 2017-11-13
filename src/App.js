@@ -9,6 +9,7 @@ import './App.css';
 import BrowseItems from './BrowseItems.js';
 import ItemDetails from './ItemDetails.js';
 import Sell from './Sell.js';
+import PurchaseHistory from './PurchaseHistory.js';
 
 
 class App extends Component {
@@ -77,13 +78,16 @@ class App extends Component {
               />
             } />
 
-            <Route exact path="/browse" render={() => <BrowseItems />} />
             <Route exact path="/sell" render={() => <Sell appState={this.state} updateState={this.updateState}/>} />
+            <Route exact path="/browse" render={() => <BrowseItems buyerID={this.state.userID} />} />
 
 
             <Route exact path="/browse/:productID" render={(routeProps) => {
-              return <ItemDetails productID={routeProps.match.params.productID} />
+              return <ItemDetails productID={routeProps.match.params.productID} buyerID={this.state.userID} />
             }} />
+
+            <Route exact path="/purchaseHistory" render={() => <PurchaseHistory buyerID={this.state.userID} />} />
+
           </div>
 
 

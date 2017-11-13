@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import CreateItem from 'CreateItem';
+import Authenticate from './Authenticate.js'
+import CreateItem from './CreateItem.js';
 
 
-class Sell extends Component{
+class Sell extends Component {
 
-    render(){
-        return (
-            <div><CreateItem/></div>
-        )
+    render() {
+        if (!this.props.appState.userID) {
+            return (
+                <Authenticate
+                    setUserID={this.props.updateState}
+                    userID={this.props.appState.userID}
+                />
+            )
+        }
+        return (<div><CreateItem /></div>)
     }
 
 }

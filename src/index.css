@@ -152,15 +152,15 @@ body {
 }
 
 .navBar{
-background-color: #7B7B7B;
+  background-color: #7B7B7B;
 }
 
 .navBarLeft{
-  text-align: left;
+  float: left;
 }
 
 .navBarRight{
-  text-align: right;
+  float: right;
 }
 
 

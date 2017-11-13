@@ -5,8 +5,8 @@ import backend from './backend/firebase-backend.js';
 class Catelogue extends Component {
 
     _handleBuyClick = () =>{
-        let buyerID = this.props.buyerID ? this.props.buyerID : backend.genUID();
-        backend.buy(buyerID, this.props.item.productID);
+        let userID = this.props.userID ? this.props.userID : backend.genUID();
+        backend.buy(userID, this.props.item.productID);
     }
 
 

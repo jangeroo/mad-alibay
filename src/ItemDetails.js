@@ -8,7 +8,7 @@ class ItemDetails extends Component {
         super(props);
 
         this.state = {
-            item: { productID: "", price: 0, blurb: "", image: "" }
+            item: { productID: "", price: 0, blurb: "", image: "", forSale: false }
         }
 
     }
@@ -18,7 +18,7 @@ class ItemDetails extends Component {
             .then(
             item => {
                 this.setState({
-                    item: { productID: this.props.productID, price: item.price, blurb: item.blurb, image: item.image }
+                    item: { productID: this.props.productID, price: item.price, blurb: item.blurb, image: item.image, forSale: item.forSale }
                 });
             }
             )
@@ -27,7 +27,7 @@ class ItemDetails extends Component {
     render() {
         return (
             <div className="catelogue-container" key={this.state.item.blurb}>
-                <Catelogue item={this.state.item} addToCart={true} buyerID={this.props.buyerID} />
+                <Catelogue item={this.state.item} addToCart={this.state.item.forSale} userID={this.props.userID} />
             </div>
         );
     }

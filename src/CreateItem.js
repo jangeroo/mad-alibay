@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
 import backend from './backend/firebase-backend.js';
+import firebase from 'firebase';
 
+let imgURL="";
 
 class CreateItem extends Component {
 
     constructor() {
         super();
-        this.state = { createdListing: null }
+        this.state = { createdListing: null, imgURL: "", imageName: 0 }
     }
 
     _handleFormSubmit = async event => {
         event.preventDefault();
-        let image = 'https://www.thepaperworker.com/media/extendware/ewimageopt/media/inline/85/8/generic-product-54d.jpg'
-        let listintgID = await backend.createListing(this.props.sellerID, this.inputPrice.value, image, this.inputBlurb.value)
-        this.setState({createdListing: listintgID})
+        await backend.createListing(this.props.userID, this.inputPrice.value, imgURL, this.inputBlurb.value)
+        .then(listingID => {this.setState({ createdListing: listingID, imgURL: imgURL })
+        console.log(this.state.imgURL, "cool");
+    })
+        
     }
 
     _createAnotherItem = event => {
-        this.setState({createdListing: null})
+        this.setState({ createdListing: null, imgURL: ""})
+    }
+
+    _uploadToStorage = async (img) => {
+        await this.setState({ imageName: backend.genUID() })
+        await firebase.storage().ref(`/listingsImages/${this.state.imageName}`).put(img);
+        this._getImgURL();
+    }
+
+    _getImgURL = async () => {
+        await firebase.storage().ref(`/listingsImages/${this.state.imageName}`).getDownloadURL().then((url) => {
+            imgURL=url;
+        });
     }
 
     render() {
@@ -33,8 +49,10 @@ class CreateItem extends Component {
                     <div>
                         <input ref={r => this.inputBlurb = r} placeholder="Blurb" />
                         <input ref={r => this.inputPrice = r} placeholder="Price" />
-                    </div>
+                        <input type="file" id="input" onChange={e => this._uploadToStorage(e.target.files[0])} />
                     <button className="btn">Create</button>
+                    </div>
+
                 </form>
             </div>
         )

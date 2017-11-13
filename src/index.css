@@ -153,8 +153,16 @@ body {
 
 .navBar{
 background-color: #7B7B7B;
-text-align: right;
 }
+
+.navBarLeft{
+  text-align: left;
+}
+
+.navBarRight{
+  text-align: right;
+}
+
 
 .navBarLinks{
   font-family: Arial;
@@ -260,4 +268,6 @@ vertical-align: middle;
   font-family: Arial;
   background-color:#FFF4E9;
   height: 30px;
+  display: inline-block;
+  border: 1px grey solid;
 }

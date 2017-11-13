@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import Authenticate from './Authenticate.js'
 import CreateItem from './CreateItem.js';
 
 
 class Sell extends Component {
 
-    render() {
-        if (!this.props.appState.userID) {
-            return (
-                <Authenticate
-                    setUserID={this.props.updateState}
-                    userID={this.props.appState.userID}
-                />
-            )
+    componentWillMount(){
+        if (!this.props.userID) {
+            this.props.routeProps.history.push('/login');
         }
-        return (<div><CreateItem sellerID={this.props.appState.userID}/></div>)
+    }
+    render() {
+
+        return (<div><CreateItem userID={this.props.userID}/></div>)
     }
 
 }

@@ -6,7 +6,8 @@ import Authenticate from './Authenticate.js';
 import Footer from './Footer.js';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import BrowseItems from './BrowseItems.js'
+import BrowseItems from './BrowseItems.js';
+import ItemDetails from './ItemDetails.js';
 
 
 class App extends Component {
@@ -77,6 +78,10 @@ class App extends Component {
 
             <Route exact path="/browse" render={() => <BrowseItems />} />
 
+
+            <Route exact path="/browse/:productID" render={(routeProps) => {
+              return <ItemDetails productID={routeProps.match.params.productID} />
+            }} />
           </div>
 
 

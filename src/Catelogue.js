@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Catelogue extends Component {
 
@@ -10,7 +11,7 @@ class Catelogue extends Component {
                     <img src={this.props.item.image} alt=""/>
                 </div>
                 <div className="item-details">
-                    <div className="item-blurb">{this.props.item.blurb}</div>
+                    <Link to={`/browse/${this.props.item.productID}`}><div className="item-blurb">{this.props.item.blurb}</div></Link>
                     <div className="item-price">{Number(this.props.item.price).toLocaleString('en')}</div>
                 </div>
             </div>

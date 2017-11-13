@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TestDataGenerator from './TestDataGenerator.js'
 
 class Header extends Component {
 
@@ -6,6 +7,7 @@ class Header extends Component {
         return (
             <div className="footer">
                 <div className="footer-bottom">© 2017 Alibay. All rights reserved.</div>
+                <div><TestDataGenerator /></div>
             </div>
         );
     }

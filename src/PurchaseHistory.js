@@ -34,6 +34,10 @@ class PurchaseHistory extends Component {
         return (
             this.props.buyerID ? (
             <div className="purchased-items-container">
+                <div>
+                    <h1>Thanks for shopping with us!</h1>
+                    <h3>Here's what you've purchased so far:</h3>
+                </div>
                 {this.state.purchasedItems.map(item => {
                     return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item} addToCart={false} buyerID={this.props.buyerID} /></div>)
                 })}

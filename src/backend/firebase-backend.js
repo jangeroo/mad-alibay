@@ -173,7 +173,7 @@ async function searchForListings(searchTerm) {
   // console.log(items)
   return allListings()
     .then(listingIDs => listingIDs.filter(
-      listingID => items[listingID].blurb.includes(searchTerm)
+      listingID => items[listingID].blurb.toLowerCase().includes(searchTerm.toLowerCase())
     ))
 }
 

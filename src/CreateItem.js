@@ -13,8 +13,6 @@ class CreateItem extends Component {
         event.preventDefault();
         let image = 'https://www.thepaperworker.com/media/extendware/ewimageopt/media/inline/85/8/generic-product-54d.jpg'
         let listintgID = await backend.createListing(this.props.sellerID, this.inputPrice.value, image, this.inputBlurb.value)
-        this.inputPrice.value = ''
-        this.inputBlurb.value = ''
         this.setState({createdListing: listintgID})
     }
 

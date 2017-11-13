@@ -38,9 +38,8 @@ class BrowseItems extends Component {
                 <SearchBar onResult={this._getItemsForSale} />
 
                 {this.state.itemsForSale.map(item => {
-                    return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item} addToCart={false} buyerID={this. props.buyerID}/></div>)
-                }
-                )}
+                    return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item} addToCart={false} buyerID={this.props.buyerID}/></div>)
+                })}
             </div>
         );
     }

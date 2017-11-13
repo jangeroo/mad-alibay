@@ -169,7 +169,7 @@ Once an item is sold, it will not be returned by searchForListings
 async function searchForListings(searchTerm) {
   let items = await itemListings.once('value')
     .then(data => data.val())
-  console.log(items)
+  // console.log(items)
   return allListings()
     .then(listingIDs => listingIDs.filter(
       listingID => items[listingID].blurb.includes(searchTerm)

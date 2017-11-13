@@ -80,7 +80,6 @@ class App extends Component {
 
 
             <Route exact path="/browse/:productID" render={(routeProps) => {
-              console.log(routeProps);
               return <ItemDetails productID={routeProps.match.params.productID} />
             }} />
           </div>

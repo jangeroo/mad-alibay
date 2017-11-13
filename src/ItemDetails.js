@@ -22,7 +22,6 @@ class ItemDetails extends Component {
                 });
             }
             )
-
     }
 
     render() {
@@ -30,7 +29,6 @@ class ItemDetails extends Component {
             <div className="catelogue-container" key={this.state.item.blurb}>
                 <Catelogue item={this.state.item} />
             </div>
-
         );
     }
 }

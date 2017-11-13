@@ -9,6 +9,7 @@ import './App.css';
 import BrowseItems from './BrowseItems.js';
 import ItemDetails from './ItemDetails.js';
 import CreateItem from './CreateItem.js';
+import Sell from './Sell.js';
 
 
 class App extends Component {
@@ -78,7 +79,7 @@ class App extends Component {
             } />
 
             <Route exact path="/browse" render={() => <BrowseItems />} />
-            <Route exact path="/sell" render={() => <CreateItem />} />
+            <Route exact path="/sell" render={() => <Sell />} />
 
 
             <Route exact path="/browse/:productID" render={(routeProps) => {

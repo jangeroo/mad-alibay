@@ -251,3 +251,13 @@ align-content: center;
 justify-content: center;
 vertical-align: middle;
 }
+
+.CreateItem input {
+  border-radius: 10px;
+  width: 90%;
+  margin-top: 10px;
+  text-align: center;
+  font-family: Arial;
+  background-color:#FFF4E9;
+  height: 30px;
+}

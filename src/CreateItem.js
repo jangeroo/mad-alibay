@@ -5,11 +5,12 @@ class CreateItem extends Component {
 
     render() {
         return (
-            <div className="CreateList">
+            <div className="CreateItem">
                 <form>
-                    <input placeholder="Blurb" className=""/>
-                    <input placeholder="Price" />
-
+                    <div>
+                        <input placeholder="Blurb" />
+                        <input placeholder="Price" />
+                    </div>
                     <button className="btn">Create</button>
                 </form>
             </div>

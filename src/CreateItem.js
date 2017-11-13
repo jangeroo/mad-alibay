@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 
 class CreateItem extends Component {
 
-    constructor() {
-        super();
-    }
-
     render() {
         return (
             <div className="CreateList">

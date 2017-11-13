@@ -138,9 +138,14 @@ allItemsBought returns the IDs of all the items bought by a buyer
     returns: a promise containing an array of listing IDs
 */
 function allItemsBought(buyerID) {
+  console.log(buyerID,"me");
   return itemsBought.child(buyerID).once('value')
-    .then(data => data.val())
-    .then(items => Object.keys(items))
+    .then(data => {
+      console.log(data.val(),"hi")
+      return data.val()})
+    .then(items => {
+      console.log(items,"cool",Object.keys(items))
+      return Object.keys(items)})
     .catch(err => [])
 }
 

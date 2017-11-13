@@ -14,7 +14,7 @@ class Sell extends Component {
                 />
             )
         }
-        return (<div><CreateItem /></div>)
+        return (<div><CreateItem sellerID={this.props.appState.userID}/></div>)
     }
 
 }

@@ -89,6 +89,7 @@ function getItemDescription(listingID) {
         image: item.val().image,
         price: item.val().price,
         blurb: item.val().blurb,
+        forSale: item.val().forSale
       }
     })
     .catch(error => {

@@ -10,13 +10,21 @@ class NavBar extends Component {
         if(!this.props.userID) {
             return (
                 <div className="navBar">
+                    <div className="navBarRight">
                     <Link className="navBarLinks" to='/login'>Login</Link>
+                    </div>
+
                   </div>
             );
         }
         return(
             <div className="navBar">
+                <div className="navBarRight">
                 <Link className="navBarLinks" to='/' onClick={this._handleClick}>Sign Out</Link>
+                </div>
+                <div className="navBarLeft">
+                <Link className="navBarLinks" to='/myAccount'>My Account</Link>
+                    </div>
             </div>
 
         )

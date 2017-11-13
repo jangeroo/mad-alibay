@@ -7,21 +7,22 @@ class PurchaseHistory extends Component {
 
     constructor() {
         super();
-        this.state = { purchasedItems: [], boughtSingleItem: false }
+        this.state = { purchasedItems: [] }
     }
 
     componentWillMount() {
-        if (this.props.buyerID) this._getPurchaseHistory(this.props.buyerID);
+        if (this.props.userID) this._getPurchaseHistory(this.props.userID);
     }
 
-    _getPurchaseHistory = buyerID => {
-        backend.allItemsBought(buyerID)
+    _getPurchaseHistory = userID => {
+        backend.allItemsBought(userID)
             .then(listingIDs => {
+                console.log(listingIDs);
                 let arrItemObjs = []
                 listingIDs.forEach(ID => {
                     backend.getItemDescription(ID)
                         .then(item => {
-                            const itemObj = { productID: ID, blurb: item.blurb, image: item.image, price: item.price }
+                            const itemObj = { productID: ID, blurb: item.blurb, image: item.image, price: item.price, forSale: item.forSale }
                             arrItemObjs.push(itemObj);
                             this.setState({ purchasedItems: arrItemObjs });
                         })
@@ -30,16 +31,17 @@ class PurchaseHistory extends Component {
     }
 
     render() {
+        console.log(this.props.userID);
 
         return (
-            this.props.buyerID ? (
+            this.props.userID ? (
             <div className="purchased-items-container">
                 <div>
                     <h1>Thanks for shopping with us!</h1>
                     <h3>Here's what you've purchased so far:</h3>
                 </div>
                 {this.state.purchasedItems.map(item => {
-                    return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item} addToCart={false} buyerID={this.props.buyerID} /></div>)
+                    return (<div className="catelogue-container" key={item.blurb}><Catelogue item={item} addToCart={item.forSale} userID={this.props.userID} /></div>)
                 })}
             </div>) :
             (<div className="non-user"> <h2>Thank You for purchasing an item!</h2>

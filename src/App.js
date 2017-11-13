@@ -10,6 +10,8 @@ import BrowseItems from './BrowseItems.js';
 import ItemDetails from './ItemDetails.js';
 import Sell from './Sell.js';
 import PurchaseHistory from './PurchaseHistory.js';
+import SellHistory from './SellHistory.js';
+import UserAccountHome from './UserAccountHome.js';
 
 
 class App extends Component {
@@ -18,12 +20,13 @@ class App extends Component {
     super();
     this.state = {
       userID: null,
+      username: null
     }
   }
 
   updateState = update => {
     // console.log('updating App state with', update);
-    this.setState(st => update)
+    this.setState(update)
   }
 
   render() {
@@ -75,18 +78,23 @@ class App extends Component {
               <Authenticate
                 setUserID={this.updateState}
                 userID={this.state.userID}
+                username={this.state.username}
+                routeProps={routeProps}
               />
             } />
 
-            <Route exact path="/sell" render={() => <Sell appState={this.state} updateState={this.updateState}/>} />
-            <Route exact path="/browse" render={() => <BrowseItems buyerID={this.state.userID} />} />
+            <Route exact path="/sell" render={(routeProps) => <Sell userID={this.state.userID} routeProps={routeProps}/>} />
+            <Route exact path="/browse" render={() => <BrowseItems userID={this.state.userID} />} />
 
 
             <Route exact path="/browse/:productID" render={(routeProps) => {
-              return <ItemDetails productID={routeProps.match.params.productID} buyerID={this.state.userID} />
+              return <ItemDetails productID={routeProps.match.params.productID} userID={this.state.userID} />
             }} />
 
-            <Route exact path="/purchaseHistory" render={() => <PurchaseHistory buyerID={this.state.userID} />} />
+            <Route exact path="/purchaseHistory" render={() => <PurchaseHistory userID={this.state.userID} />} />
+            <Route exact path="/sellHistory" render={() => <SellHistory userID={this.state.userID} />} />
+
+            <Route exact path="/myAccount" render={() => <UserAccountHome username={this.state.username} />} />
 
           </div>
 
